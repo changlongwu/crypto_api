@@ -1,12 +1,12 @@
 body{
   background-color: antiquewhite;
 }
-/* #root {
+#root {
   max-width: 1280px;
-  margin: 0 30rem;
+  margin: 0 20rem;
   padding: 2rem;
   text-align: center;
-} */
+}
 
 .whole-page{
   padding: 50px;
