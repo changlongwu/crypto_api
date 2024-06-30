@@ -8,14 +8,26 @@ const CoinInfo = ({image, name, symbol}) =>{
     
     // this will run whenever the symbol we pass in changes
     useEffect(()=>{
+        const controller = new AbortController();
+
+
         const getCoinPrice = async () =>{
-            const response = await fetch (
-                `https://min-api.cryptocompare.com/data/price?fsym=${symbol}&tsyms=USD&api_key=${API_KEY}`
-            )
-            const json = await response.json();
-            setPrice(json);
+            try{
+                const response = await fetch (
+                    `https://min-api.cryptocompare.com/data/price?fsym=${symbol}&tsyms=USD&api_key=${API_KEY}`,
+                    {signal: controller.signal}
+                );
+                const json = await response.json();
+                setPrice(json);
+            } catch(error){
+                if (error.name!=="AbortError"){
+                    console.error(error);
+                }
+            }
+
         };
-        getCoinPrice().catch(console.error);
+        getCoinPrice();
+        return ()=>controller.abort();
         
 
     }, [symbol]);
