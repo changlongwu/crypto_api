@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
   <BrowserRouter>
   <Routes>
-    <Route path='/crypto_api' element={<Layout/>}>
+    <Route path='/crypto_api/' element={<Layout/>}>
       <Route index={true}  element={<App />} />
       <Route index={false} path="/coinDetails/:symbol" element={<DetailView/>}   />
       
